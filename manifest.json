@@ -1,10 +1,10 @@
 {
   "name":         "aerrow-percona",
   "version":      "17.3.0",
-  "description":  "SQL database server",
+  "description":  "Percona mySql database server",
   "organization": "Artned",
   "brand":        "Artned",
-  "homepage":     "http://www.artned.org/"
+  "homepage":     "http://www.artned.org/",
 	"customer_metadata": {
 	"mysql_pw":             {"type": "text", "description": "Percona mysql password"},
 	"mail_smarthost":       {"type": "text", "description": "hostname of remote smtp server"},

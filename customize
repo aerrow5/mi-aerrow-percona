@@ -7,23 +7,6 @@ PATH=/opt/local/gnu/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin
 # Munin plugins
 MUNIN_PLUGIN_VERSION='0.12'
 MUNIN_PLUGINS="
-	cert_expire
-	cputime
-	df
-	load
-	uptime
-	users
-	proc_state
-	vfs_bytes
-	vfs_iops
-	vfs_latency
-	if_net0
-	pkg_audit
-	memory_cap
-	swap_cap
-	smf
-	tcp
-	udp
 	mysql_bin_relay_log
 	mysql_commands
 	mysql_connections
@@ -49,20 +32,6 @@ MUNIN_PLUGINS="
 	mysql_tmp_tables
 "
 
-echo "* Use the skylime pkgsrc mirror"
-gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkgin/repositories.conf
-gsed -i 's:pkgsrc.joyent.com:pkgsrc.smartos.skylime.net:g' /opt/local/etc/pkg_install.conf
-pkg_admin rebuild
-pkgin -y up
-
-## MUNIN
-echo "* Create munin template file that will be used during mdata setup"
-cp /opt/local/etc/munin/munin-node.conf /opt/local/etc/munin/munin-node.conf.tpl
-
-echo "* Download and install community munin plugins (overwrite all other plugins)"
-curl -L https://github.com/drscream/smartos-munin-plugins/archive/v${MUNIN_PLUGIN_VERSION}.tar.gz | gtar xz -C /opt/local/lib/munin/plugins --strip-components=1
-
-
 # Exit if any commands fail
 set -o errexit
 
@@ -72,23 +41,12 @@ rm -rf /var/mysql/*
 echo "* Activate munin plugins"
 /opt/core/bin/munin-node-plugins ${MUNIN_PLUGINS}
 
-# Configuring image specific packages
-echo "* Configuring image specific packages.";
-
 echo "* Cleanup home/admin because of delegate dataset usage"
 rm -rf /home/admin/.[^.]*
 
 # Clean up
 echo "* Cleaning up."
 rm -rf /root/*
-pkgin clean
-
-
-# Provide workaround for /.zonecontrol/metadata.sock issue
-# https://github.com/joyent/smtools/issues/3
-gsed -i 's:^rm -f /.zonecontrol/metadata.sock$:rm -f /.zonecontrol/metadata.sock || true:g' \
-	/opt/local/bin/sm-prepare-image
-
 
 # Prepare image for provisioning
 sm-prepare-image -y
