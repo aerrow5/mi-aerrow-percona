@@ -1,0 +1,8 @@
+{
+  "name":         "aerrow-percona",
+  "version":      "17.3.0",
+  "description":  "SQL database server",
+  "organization": "Artned",
+  "brand":        "Artned",
+  "homepage":     "http://www.artned.org/"
+}

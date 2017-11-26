@@ -1,0 +1,43 @@
+# List packages to add to your image one per line.
+# dont like vim
+nano
+# additional tools
+diffutils
+htop
+logcheck
+# transport:
+curl
+wget
+# other:
+grep
+gsed
+sudo
+# colorlog + remote logging
+ccze
+rsyslog
+# spiped
+spiped
+# dtrace
+dtracetools
+# znapzend
+znapzend
+# munin-node
+https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q2/x86_64/munin-common-2.0.30.tgz
+https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q2/x86_64/munin-node-2.0.30.tgz
+p5-Net-CIDR
+p5-LWP-UserAgent-Determined
+p5-Switch
+# nullmailer
+https://pkgsrc.smartos.skylime.net/skylime-extra/2017Q2/x86_64/nullmailer-2.0.tgz
+# Percona specific:
+p5-DBD-percona57
+p5-Cache-Cache
+percona-server
+percona-client
+percona-toolkit
+percona57-xtrabackup
+qpress
+quickbackup-percona
+innotop
+mytop
+smtools
